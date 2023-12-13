@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
+    <title>Login</title>
 </head>
+
 <body>
-    
-    <h2>Formulario de registro</h2>
+
+    <h2>Login</h2>
 
     <% if (locals.errores) { %>
 
-    <%   errores.forEach((error) => {  %>
-            <p>
-              <%=  error.msg  %>
-            </p>
-    <%  }) %>
+        <%   errores.forEach((error) => {  %>
+                <p>
+                  <%=  error.msg  %>
+                </p>
+        <%  }) %>
+    
+        <%  }  %>
 
-    <%  }  %>
+    <form action="/login" method="POST">
 
-    <form method="POST" action="/register">
-
-        <label for="email">Correo electronico</label>
+        <label for="email">Email</label>
         <input type="email" name="email" value="<%= locals.old && old.email ? old.email : '' %>">
 
         <label for="password">Contrasenia</label>
         <input type="password" name="password">
 
-        <button type="submit">Registrarme</button>
+        <button type="submit">Login</button>
 
     </form>
 
 </body>
+
 </html>

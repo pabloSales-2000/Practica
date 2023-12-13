@@ -1,5 +1,6 @@
 const { validationResult } = require('express-validator');
 const fs = require('fs');
+const path = require('path');
 
 
 const usersController = {
@@ -14,13 +15,15 @@ const usersController = {
     guardarRegistro: (req, res) => {
         let errores = validationResult(req)
 
-        if(errores.isEmpty) {
+        if(errores.isEmpty()) {
             let usuario = {
                 email: req.body.email,
                 password: req.body.password
             }
 
-            let usuariosRegistrados = fs.readFileSync('usuariosRegistrados.json', {encoding: 'utf-8'});
+            let usersRegisterPATH = path.resolve(__dirname, '../BD/usuariosRegistrados.json')
+
+            let usuariosRegistrados = fs.readFileSync(usersRegisterPATH, {encoding: 'utf-8'});
             let usuariosNuevos;
 
             if(usuariosRegistrados == ''){
@@ -31,13 +34,27 @@ const usersController = {
 
             usuariosNuevos.push(usuario)
 
-            fs.writeFileSync('usuariosRegistrados.json', JSON.stringify(usuariosNuevos, null, 2) )
+            fs.writeFileSync(usersRegisterPATH, JSON.stringify(usuariosNuevos, null, 2) )
 
             res.redirect('/')
 
 
         }else{
-            res.render('registro', {errors: errores.array(), old: req.body})
+            res.render('registro', {errores: errores.array(), old: req.body})
+        }
+    },
+
+    login: (req, res) => {
+        res.render('login')
+    },
+
+    procesLogin: (req, res) => {
+        let errores = validationResult(req)
+
+        if(errores.isEmpty()) {
+
+        }else{
+            res.render('login', {errores: errores.array(), old: req.body})
         }
     }
 }

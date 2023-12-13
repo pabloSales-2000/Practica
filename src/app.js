@@ -16,7 +16,7 @@ const publicPath = path.resolve(__dirname, './public');
 //Server LISTEN (levantar servidor)
 
 app.listen(PORT, () => {
-    console.log(`SERVIDOR CORRIENDO EN PUERTO ${PORT} y http://localhost:3000/`);
+    console.log(`SERVIDOR CORRIENDO EN PUERTO ${PORT} http://localhost:3000/`);
 })
 
 //EJS SETTING
