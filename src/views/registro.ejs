@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+</head>
+<body>
+    
+    <h2>Formulario de registro</h2>
+
+    <% if (locals.errors) { %>
+
+    <%   errores.forEach((error) => {  %>
+            <p>
+              <%  error.msg  %>
+            </p>
+    <%  }) %>
+
+    <%  }  %>
+
+    <form method="POST" action="/register">
+
+        <label for="email">Correo electronico</label>
+        <input type="email" name="email" value="<%= locals.old && old.email ? old.email : '' %>">
+
+        <label for="password">Contrasenia</label>
+        <input type="password" name="password">
+
+    </form>
+
+</body>
+</html>
